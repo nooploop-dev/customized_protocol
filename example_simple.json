@@ -1,0 +1,53 @@
+{
+    "protocols": [
+        {
+            "name": "TOFSense_Frame0",
+            "mode": "read",
+            "minimum_length": 16,
+            "block": [
+                {
+                    "use": "frame_header",
+                    "hex": "57 00"
+                },
+                {
+                    "use": "reserved",
+                    "bytes": 1
+                },
+                {
+                    "use": "value",
+                    "data_type": "uint8_t",
+                    "name": "id"
+                },
+                {
+                    "use": "value",
+                    "data_type": "uint32_t",
+                    "name": "systemTime"
+                },
+                {
+                    "use": "line",
+                    "data_type": "uint24_t*1000",
+                    "name": "dis"
+                },
+                {
+                    "use": "line",
+                    "data_type": "uint8_t",
+                    "name": "disStatus"
+                },
+                {
+                    "use": "line",
+                    "data_type": "uint16_t",
+                    "name": "signalStrength"
+                },
+                {
+                    "use": "reserved",
+                    "bytes": 1
+                },
+                {
+                    "use": "frame_tail",
+                    "check_type": "sum",
+                    "bytes": 1
+                }
+            ]
+        }
+    ]
+}

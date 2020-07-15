@@ -1,0 +1,147 @@
+{
+    "import": [
+        "example_utils.json",
+        "example_setting.json"
+    ],
+    "protocols": [
+        {
+            "name": "NLink_LinkTrack_Node_Frame2",
+            "mode": "read",
+            "minimum_length": 120,
+            "block": [
+                {
+                    "use": "frame_header",
+                    "hex": "55 04"
+                },
+                {
+                    "import": "LtFrameLength"
+                },
+                {
+                    "import": "LtRole"
+                },
+                {
+                    "import": "LtIdValue"
+                },
+                {
+                    "import": "LtSystemTime"
+                },
+                {
+                    "import": "LtEop3"
+                },
+                {
+                    "import": "LtPos3"
+                },
+                {
+                    "import": "LtVel3"
+                },
+                {
+                    "use": "reserved",
+                    "bytes": 9
+                },
+                {
+                    "import": "LtImuGyro3"
+                },
+                {
+                    "import": "LtImuAcc3"
+                },
+                {
+                    "use": "reserved",
+                    "bytes": 12
+                },
+                {
+                    "import": "LtAngle3"
+                },
+                {
+                    "import": "LtQuaternion4"
+                },
+                {
+                    "use": "reserved",
+                    "bytes": 4
+                },
+                {
+                    "import": "LtLocalTime"
+                },
+                {
+                    "use": "reserved",
+                    "bytes": 10
+                },
+                {
+                    "import": "LtVoltage"
+                },
+                {
+                    "use": "group",
+                    "block_count": {
+                        "data_type": "uint8_t"
+                    },
+                    "block_id": {
+                        "import": "LtBlockRoleId"
+                    },
+                    "block": [
+                        {
+                            "import": "LtDis"
+                        },
+                        {
+                            "import": "LtFpRssi"
+                        },
+                        {
+                            "import": "LtRxRssi"
+                        },
+                        {
+                            "use": "reserved",
+                            "bytes": 6
+                        }
+                    ]
+                },
+                {
+                    "import": "LtSumCheck"
+                }
+            ],
+            "scripts": {
+                "global_properties": [
+                    "length"
+                ],
+                "import": [
+                    "example_module.js"
+                ],
+                "items": [
+                    {
+                        "name": "pos_processed",
+                        "args": {
+                            "from_frame_data": [
+                                "pos_0",
+                                "pos_1",
+                                "pos_2"
+                            ],
+                            "from_user_input": [
+                                "z_offset"
+                            ],
+                            "from_global_properties": [
+                                "length"
+                            ]
+                        },
+                        "outputs": [
+                            "x",
+                            "y",
+                            "z"
+                        ],
+                        "function": "positionFilter",
+                        "use": "position"
+                    },
+                    {
+                        "name": "angle_0",
+                        "args": {
+                            "from_frame_data": [
+                                "angle_0"
+                            ],
+                            "from_user_input": [
+                                "min",
+                                "max"
+                            ]
+                        },
+                        "function": "checkRange"
+                    }
+                ]
+            }
+        }
+    ]
+}

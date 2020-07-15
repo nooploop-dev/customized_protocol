@@ -1,0 +1,158 @@
+{
+    "items": {
+        "LtFrameLength": {
+            "use": "frame_length",
+            "data_type": "uint16_t"
+        },
+        "LtSumCheck": {
+            "use": "frame_tail",
+            "check_type": "sum",
+            "bytes": 1
+        },
+        "LtBccCheck": {
+            "use": "frame_tail",
+            "check_type": "bcc"
+        },
+        "LtCrcCheck": {
+            "use": "frame_tail",
+            "check_type": "crc",
+            "bytes": 1,
+            "polynomial": "0x5503",
+            "initial_value": "0x5503",
+            "final_xor": "0x5503",
+            "reflect_input": true,
+            "reflect_output": true
+        },
+        "LtAnchorCoordinates": {
+            "use": "block_array",
+            "name": "anchors",
+            "array_length": 10,
+            "block": [
+                {
+                    "name": "pos",
+                    "use": "position",
+                    "data_type": "int24_t/1000[3]"
+                }
+            ]
+        },
+        "LtBlockRoleId": {
+            "use": "block_id",
+            "type": "linktrack_role_id",
+            "role": {
+                "data_type": "uint8_t",
+                "elements": [
+                    "N",
+                    "A",
+                    "T",
+                    "C",
+                    "M",
+                    "S",
+                    "Mo"
+                ]
+            },
+            "id": {
+                "data_type": "uint8_t"
+            }
+        },
+        "LtRole": {
+            "use": "flag",
+            "bit_field": {
+                "bits": 8,
+                "name": "role",
+                "elements": [
+                    "NODE",
+                    "ANCHOR",
+                    "TAG",
+                    "CONSOLE",
+                    "MASTER",
+                    "SLAVE",
+                    "Monitor"
+                ]
+            }
+        },
+        "LtIdValue": {
+            "use": "value",
+            "data_type": "uint8_t",
+            "name": "id"
+        },
+        "LtId": {
+            "use": "id",
+            "data_type": "uint8_t"
+        },
+        "LtSystemTime": {
+            "use": "value",
+            "data_type": "uint32_t",
+            "name": "systemTime"
+        },
+        "LtLocalTime": {
+            "use": "value",
+            "data_type": "uint32_t",
+            "name": "localTime"
+        },
+        "LtVoltage": {
+            "name": "voltage",
+            "use": "line",
+            "data_type": "uint16_t/1000"
+        },
+        "LtPos3": {
+            "name": "pos",
+            "use": "position",
+            "data_type": "int24_t/1000[3]"
+        },
+        "LtEop3": {
+            "name": "eop",
+            "use": "line",
+            "data_type": "uint8_t/100[3]"
+        },
+        "LtVel3": {
+            "name": "vel",
+            "use": "line",
+            "data_type": "int24_t/10000[3]"
+        },
+        "LtImuGyro3": {
+            "name": "imuGyro",
+            "use": "line",
+            "data_type": "float[3]"
+        },
+        "LtImuAcc3": {
+            "name": "imuAcc",
+            "use": "line",
+            "data_type": "float[3]"
+        },
+        "LtAngle3": {
+            "name": "angle",
+            "use": "attitude",
+            "data_type": "int16_t/100[3]"
+        },
+        "LtQuaternion4": {
+            "name": "quaternion",
+            "use": "value",
+            "data_type": "float[4]"
+        },
+        "LtDis": {
+            "use": "line",
+            "data_type": "uint24_t/1000",
+            "name": "dis"
+        },
+        "LtFpRssi": {
+            "use": "line",
+            "data_type": "uint8_t/-2",
+            "name": "fpRssi"
+        },
+        "LtRxRssi": {
+            "use": "line",
+            "data_type": "uint8_t/-2",
+            "name": "rxRssi"
+        },
+        "Position3&Attitude3": {
+            "name": "pose",
+            "use": "position_attitude",
+            "position": {
+                "data_type": "int24_t/1000[3]"
+            },
+            "attitude": {
+                "data_type": "int16_t/100[3]"
+            }
+        }
+    }
+}

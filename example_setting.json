@@ -1,0 +1,62 @@
+{
+    "import": [
+        "example_utils.json"
+    ],
+    "protocols": [
+        {
+            "name": "Example_Setting_Frame",
+            "mode": "read_write",
+            "minimum_length": 32,
+            "block": [
+                {
+                    "use": "frame_header",
+                    "hex": "77"
+                },
+                {
+                    "use": "flag",
+                    "bit_field": [
+                        {
+                            "bits": 2,
+                            "name": "mode",
+                            "elements": [
+                                "write",
+                                "read",
+                                "restart=3"
+                            ]
+                        },
+                        {
+                            "bits": 2
+                        },
+                        {
+                            "bits": 1,
+                            "name": " led",
+                            "elements": [
+                                "off",
+                                "on"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "use": "value",
+                    "data_type": "uint24_t",
+                    "name": "baudrate"
+                },
+                {
+                    "import": "LtPos3"
+                },
+                {
+                    "import": "LtAngle3"
+                },
+                {
+                    "use": "reserved",
+                    "bytes": 11,
+                    "placeholder": "0xff"
+                },
+                {
+                    "import": "LtSumCheck"
+                }
+            ]
+        }
+    ]
+}
