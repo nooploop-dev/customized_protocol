@@ -37,7 +37,7 @@
         },
         "LtBlockRoleId": {
             "use": "block_id",
-            "type": "linktrack_role_id",
+            "type": "role_id",
             "role": {
                 "data_type": "uint8_t",
                 "elements": [
